@@ -35,13 +35,3 @@ def add_solutions():
 
 if __name__ == '__main__':
         app.run(host="0.0.0.0", port=8080)
-
-#TEST DATA
-
-#with app.app_context():
-... #    s1 = Solution(problem="No sound on laptop", solution="restart")
-...  #   s2 = Solution(problem="Wifi not working", solution="restart")
-... #    db.session.add(s1)
-... #    db.session.add(s2)
-...   #  db.session.commit()
-...   #  print("test data added successfully!)
