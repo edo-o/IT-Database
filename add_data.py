@@ -1,5 +1,6 @@
-from app import db, Solution
-db.create_all()
+from app import db, Solution, app
+with app.app_context():
+    db.create_all()
 
 s1 = Solution(problem="No sound on laptop", solution="Check if sound muted")
 s2 = Solution(problem="Wifi not working", solution="Restart router, check network settings")

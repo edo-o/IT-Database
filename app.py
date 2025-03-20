@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -17,10 +17,22 @@ def index():
     solutions = Solution.query.filter(Solution.problem.contains(search_query)).all()
     return render_template("index.html", solutions=solutions, search_query=search_query)
 
+@app.route('/add', methods=['GET', 'POST'])
+def add_solutions():
+     if request.method == 'POST':
+          problem = request.form.get('problem')
+          solution = request.form.get('solution')
+
+          if problem and solution:
+               new_solution = Solution(problem=problem, solution=solution)
+               db.session.add(new_solution)
+               db.session.commit()
+               return redirect(url_for('index'))
+          return render_template("add.html")
+     
+     
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-        app.run(debug=True)
+        app.run(host="0.0.0.0", port=8080)
 
 #TEST DATA
 
