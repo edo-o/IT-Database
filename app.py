@@ -19,18 +19,20 @@ def index():
 
 @app.route('/add', methods=['GET', 'POST'])
 def add_solutions():
-     if request.method == 'POST':
-          problem = request.form.get('problem')
-          solution = request.form.get('solution')
+    if request.method == 'POST':
+        problem = request.form.get('problem')
+        solution = request.form.get('solution')
 
-          if problem and solution:
-               new_solution = Solution(problem=problem, solution=solution)
-               db.session.add(new_solution)
-               db.session.commit()
-               return redirect(url_for('index'))
-          return render_template("add.html")
+        if problem and solution:
+            new_solution = Solution(problem=problem, solution=solution)
+            db.session.add(new_solution)
+            db.session.commit()
+            return redirect(url_for('index')) 
+
+    return render_template("add_solution.html")
+
      
-     
+
 if __name__ == '__main__':
         app.run(host="0.0.0.0", port=8080)
 
